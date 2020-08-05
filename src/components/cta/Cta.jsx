@@ -23,6 +23,12 @@ const Cta = () => {
   }, []);
 
   //   console.log(movie);
+
+  function truncate(string, number) {
+    return string?.length > number
+      ? string.substr(0, number - 1) + "..."
+      : string;
+  }
   return (
     <header
       className="cta-container"
@@ -33,13 +39,16 @@ const Cta = () => {
       }}
     >
       <div className="cta-content">
-        <h1>{movie?.title || movie?.name || movie?.original_name}</h1>
+        <h1 className="cta-title">
+          {movie?.title || movie?.name || movie?.original_name}
+        </h1>
         <div className="cta-buttons">
           <button className="cta-button">Play</button>
           <button className="cta-button">My List</button>
         </div>
-        <h3 className="cta-description">{movie.overview}</h3>
+        <h2 className="cta-description">{truncate(movie.overview, 150)}</h2>
       </div>
+      <div className="cta-fadeBottom" />
     </header>
   );
 };

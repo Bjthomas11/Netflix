@@ -4,14 +4,14 @@ import requests from "./requests";
 import Cta from "./components/cta/Cta";
 import Navbar from "./components/navbar/Navbar";
 
-import "./App.css";
+import "./App.scss";
 
 // api key: 305cf5d9dcc3ea93b3a6411ba033664b
 // firebase site NEEDS DEPLOY AFTER: https://netflix-88dd8.web.app/
 
 function App() {
   return (
-    <div>
+    <div className="netflix-container">
       <Navbar />
       <Cta />
       <MovieRow
