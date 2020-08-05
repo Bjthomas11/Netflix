@@ -3,8 +3,7 @@ import axios from "../../axios";
 
 import "./MovieRow.scss";
 
-const MovieRow = ({ title, fetchUrl }) => {
-  // movie state
+const MovieRow = ({ title, fetchUrl, isLargeMovieRow }) => {
   const [movies, setMovies] = useState([]);
 
   const base_url = "https://image.tmdb.org/t/p/original/";
@@ -19,18 +18,22 @@ const MovieRow = ({ title, fetchUrl }) => {
     fetchData();
   }, [fetchUrl]);
 
-  console.table(movies);
+  // console.table(movies);
 
   return (
     <div className="movie-row">
       <h2>{title}</h2>
       <div className="movie-images">
-        {movies.map((movie, id) => (
+        {movies.map((movie) => (
           <img
-            key={id}
-            src={`${base_url}${movie.poster_path}`}
+            key={movie.id}
+            src={`${base_url}${
+              isLargeMovieRow ? movie.poster_path : movie.backdrop_path
+            }`}
             alt={movie.name}
-            className="movie-image"
+            className={`movie-image ${
+              isLargeMovieRow && "movie-image-large"
+            } ?`}
           />
         ))}
       </div>
