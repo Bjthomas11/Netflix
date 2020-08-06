@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../axios";
-import Youtube from "react-youtube";
+import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 
 import "./MovieRow.scss";
@@ -21,7 +21,7 @@ const MovieRow = ({ title, fetchUrl, isLargeMovieRow }) => {
     fetchData();
   }, [fetchUrl]);
 
-  const options = {
+  const opts = {
     height: "390",
     width: "100%",
     playerVars: {
@@ -38,7 +38,7 @@ const MovieRow = ({ title, fetchUrl, isLargeMovieRow }) => {
           const urlParams = new URLSearchParams(new URL(url).search);
           setTrailerUrl(urlParams.get("v"));
         })
-        .catch((error) => console.error(error));
+        .catch((error) => console.log(error));
     }
   };
 
@@ -56,11 +56,11 @@ const MovieRow = ({ title, fetchUrl, isLargeMovieRow }) => {
             className={`movie-image ${
               isLargeMovieRow && "movie-image-large"
             } ?`}
-            onClick={handleClick}
+            onClick={() => handleClick(movie)}
           />
         ))}
       </div>
-      {trailerUrl && <Youtube videoId={trailerUrl} opts={options} />}
+      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
     </div>
   );
 };
