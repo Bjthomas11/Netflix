@@ -53,7 +53,7 @@ const MovieRow = ({ title, fetchUrl, isLargeMovieRow }) => {
               isLargeMovieRow ? movie.poster_path : movie.backdrop_path
             }`}
             alt={movie.name}
-            className={`movie-image ${
+            className={`movie-image ${title} ${
               isLargeMovieRow && "movie-image-large"
             } ?`}
             onClick={() => handleClick(movie)}

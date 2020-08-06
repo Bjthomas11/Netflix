@@ -18,11 +18,15 @@
             max-height: 100px;
             margin-right: 10px;
             transition: transform 450ms;
-            cursor: pointer;
+
 
             &:hover {
                 transform: scale(1.08);
             }
+        }
+
+        .Originals {
+            cursor: pointer;
         }
 
         img.movie-image-large {
