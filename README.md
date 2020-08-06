@@ -6,3 +6,5 @@
 
 Wanted to create my version of Netflix with React and using firebase as the hosting for quick deploying.
 
+Using themoviedb API
+
