@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../axios";
+import Youtube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 import "./MovieRow.scss";
 
 const MovieRow = ({ title, fetchUrl, isLargeMovieRow }) => {
   const [movies, setMovies] = useState([]);
+  const [trailerUrl, setTrailerUrl] = useState("");
 
   const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -18,7 +21,26 @@ const MovieRow = ({ title, fetchUrl, isLargeMovieRow }) => {
     fetchData();
   }, [fetchUrl]);
 
-  // console.table(movies);
+  const options = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  const handleClick = (movie) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+    } else {
+      movieTrailer(movie?.name || "")
+        .then((url) => {
+          const urlParams = new URLSearchParams(new URL(url).search);
+          setTrailerUrl(urlParams.get("v"));
+        })
+        .catch((error) => console.error(error));
+    }
+  };
 
   return (
     <div className="movie-row">
@@ -34,9 +56,11 @@ const MovieRow = ({ title, fetchUrl, isLargeMovieRow }) => {
             className={`movie-image ${
               isLargeMovieRow && "movie-image-large"
             } ?`}
+            onClick={handleClick}
           />
         ))}
       </div>
+      {trailerUrl && <Youtube videoId={trailerUrl} opts={options} />}
     </div>
   );
 };
